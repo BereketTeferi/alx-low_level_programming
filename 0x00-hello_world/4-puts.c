@@ -1,11 +1,10 @@
 #include <stdio.h>
 
 /**
- * main : prints
- * used for printing
- * programming is like building a multilingual puzzle
- * this is fun
- * return 0 because of int
+ * main - prints programming is like...
+ *
+ * Description - The main functions used puts
+ * Return - zero because its int.
  */
 
 int main(void)
