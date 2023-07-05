@@ -5,8 +5,7 @@
  *
  * Description - The main functions used puts
  *
- * return - dont have one
- * Description - doesn't have return value
+ * Return: 0 on success, non-zero on failure
  */
 
 int main(void)
