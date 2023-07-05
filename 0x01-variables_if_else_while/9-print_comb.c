@@ -3,7 +3,7 @@
 /**
  * main - displays numbers
  *
- * Description - display number 1-9 in ascending order sparated by comma and space
+ * Description - display number 1-9 in ascending order sparated by comma
  *
  * Return: 0 if success non-zero if failure
  */
