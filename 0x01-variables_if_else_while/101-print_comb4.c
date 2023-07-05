@@ -10,12 +10,12 @@
 
 int main(void)
 {
-	int i, j;
+	int i, j, l;
 	for(i = 48; i < 58; i++)
 	{
 		for(j = i+1; j < 58; j++)
 		{
-			for(int l = j+1; l < 58; l++)
+			for(l = j+1; l < 58; l++)
 			{
 				putchar(i);
 				putchar(j);
