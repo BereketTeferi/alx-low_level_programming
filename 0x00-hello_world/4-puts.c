@@ -5,11 +5,12 @@
  *
  * Description - The main functions used puts
  *
- * return - zero because its int.
+ * return - dont have one
+ * 
+ * Description - doesn't have return value
  */
 
-int main(void)
+void main(void)
 {
 	puts("\"Programming is like building a multilingual puzzle");
-	return (0);/*This is the return*/
 }
