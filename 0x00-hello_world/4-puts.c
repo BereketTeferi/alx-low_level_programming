@@ -4,7 +4,8 @@
  * main - prints programming is like...
  *
  * Description - The main functions used puts
- * Return - zero because its int.
+ *
+ * return - zero because its int.
  */
 
 int main(void)
