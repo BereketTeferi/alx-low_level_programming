@@ -5,6 +5,7 @@
  * used for printing
  * programming is like building a multilingual puzzle
  * this is fun
+ * return 0 because of int
  */
 
 int main(void)
