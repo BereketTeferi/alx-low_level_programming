@@ -1,6 +1,12 @@
 #include <stdio.h>
 
-/**Thia ia the main function for printing */
+/**
+ * This is the main
+ * used for printing 
+ * programming is like building a multilingual puzzle
+ * 
+ * this is fun
+ */
 
 int main(void)
 {
