@@ -11,16 +11,17 @@
 int main(void)
 {
 	int i, j, l;
-	for(i = 48; i < 58; i++)
+
+	for (i = 48; i < 58; i++)
 	{
-		for(j = i+1; j < 58; j++)
+		for (j = i + 1; j < 58; j++)
 		{
-			for(l = j+1; l < 58; l++)
+			for (l = j + 1; l < 58; l++)
 			{
 				putchar(i);
 				putchar(j);
 				putchar(l);
-				if(i < 55)
+				if (i < 55)
 				{
 					putchar(',');
 					putchar(' ');
