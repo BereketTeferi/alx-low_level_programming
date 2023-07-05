@@ -1,9 +1,6 @@
 #include <stdio.h>
 
-/**Thia ia the main function for printig
- * programming is like buio;ding a multilingual puzzle
- * using puts avoiding printf
- */
+/**Thia ia the main function for printing */
 
 int main(void)
 {
