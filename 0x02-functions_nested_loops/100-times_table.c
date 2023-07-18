@@ -12,19 +12,14 @@ void print_times_table_row(int i, int j)
 {
 	int k;
 
-	if (j != 0)
-	{
-		_putchar(44);
-		_putchar(32);
-		_putchar(32);
-		_putchar(32);
-	}
 	k = i * j;
 	if (k > 99)
 	{
 		int l = k % 10;
 		int o = k / 100;
 		int m = (k % 100) / 10;
+		_putchar(44);
+		_putchar(32);
 		_putchar(o + '0');
 		_putchar(m + '0');
 		_putchar(l + '0');
@@ -33,13 +28,24 @@ void print_times_table_row(int i, int j)
 	{
 		int l = k % 10;
 		int m = (k - l) / 10;
+		_putchar(44);
+		_putchar(32);
+		_putchar(32);
 		_putchar(m + '0');
 		_putchar(l + '0');
 	}
 	else
 	{
+		if (j != 0)
+		{
+			_putchar(44);
+			_putchar(32);
+			_putchar(32);
+			_putchar(32);
+		}
 		_putchar(k + '0');
 	}
+
 }
 
 /**
