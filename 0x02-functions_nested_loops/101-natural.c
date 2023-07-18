@@ -11,17 +11,18 @@ int main(void)
 {
 	int sum = 0, count;
 
-	for(count = 1; count <= 1024; count++)
+	for (count = 1; count <= 1024; count++)
 	{
-		if(count % 3 == 0)
+		if (count % 3 == 0)
 		{
 			sum += count;
 		}
-		else if(count % 5 == 0)
+		else if (count % 5 == 0)
 		{
 			sum += count;
 		}
 	}
+	printf("%d\n", sum);
 
 	return (0);
 }
