@@ -9,13 +9,14 @@
 
 void print_times_table_row(int i, int j)
 {
-	int k;
+	int k, l, m, o;
+
 	k = i * j;
 	if (k > 99)
 	{
-		int l = k % 10;
-		int o = k / 100;
-		int m = (k % 100) / 10;
+		l = k % 10;
+		o = k / 100;
+		m = (k % 100) / 10;
 		_putchar(44);
 		_putchar(32);
 		_putchar(o + '0');
@@ -24,8 +25,8 @@ void print_times_table_row(int i, int j)
 	}
 	else if (k > 9 && k < 100)
 	{
-		int l = k % 10;
-		int m = (k - l) / 10;
+		l = k % 10;
+		m = (k - l) / 10;
 		_putchar(44);
 		_putchar(32);
 		_putchar(32);
@@ -54,6 +55,7 @@ void print_times_table_row(int i, int j)
 void print_times_table(int n)
 {
 	int i, j;
+
 	if (n <= 15 && n >= 0)
 	{
 		for (i = 0; i <= n; i++)
