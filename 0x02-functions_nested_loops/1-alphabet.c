@@ -1,14 +1,12 @@
 #include "main.h"
-void print_alphabet(void);
-int _putchar(char);
 
 /**
- * main - prints alphabets
+ * print_alphabet - prints alphabets
  *
  * Return: always 0 if success
  */
 
-int main(void)
+void print_alphabet(void)
 {
 	int i;
 
