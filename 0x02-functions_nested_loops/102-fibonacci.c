@@ -20,5 +20,6 @@ int main(void)
 
 		prev = temp;
 	}
+	printf("\n");
 	return (0);
 }
