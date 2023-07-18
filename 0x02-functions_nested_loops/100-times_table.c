@@ -20,7 +20,7 @@ void print_times_table(int n)
 				if (k > 99)
 				{
 					l = k % 10;
-				       	m = (k - l) / 10;
+					m = (k - l) / 10;
 					o = k / 100;
 					m = (k % 100) / 10;
 					_putchar(44);
