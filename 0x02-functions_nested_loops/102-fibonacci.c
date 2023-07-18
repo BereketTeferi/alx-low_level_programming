@@ -9,7 +9,7 @@
 
 int main(void)
 {
-	int count, new = 2, prev = 1;
+	int count, new = 1, prev = 1;
 	printf("%d, ",prev);
 	for(count = 0; count < 50; count++)
 	{
