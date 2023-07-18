@@ -11,15 +11,14 @@ int main(void)
 {
 	long count, new = 1, prev = 1, temp;
 
-	printf("%ld, ", prev);
-	for (count = 1; count < 49; count++)
+	printf("%ld", prev);
+	for (count = 1; count < 50; count++)
 	{
 		temp = new;
 		new += prev;
-		printf("%ld, ", new);
+		printf(", %ld", new);
 
 		prev = temp;
 	}
-	printf("%ld",new);
 	return (0);
 }
