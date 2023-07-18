@@ -9,7 +9,7 @@
 
 int main(void)
 {
-	int new = 2, prev = 1, sum = 0, count, temp;
+	int new = 1, prev = 0, sum = 0, count, temp;
 
 	for (count = 0; count < 31; count++)
 	{
@@ -21,6 +21,6 @@ int main(void)
 		new += prev;
 		prev = temp;
 	}
-	printf("%d", sum);
+	printf("%d\n", sum);
 	return (0);
 }
