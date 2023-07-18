@@ -1,5 +1,6 @@
 #include "main.h"
 void print_alphabet(void);
+int _putchar(char);
 
 /**
  * main - prints alphabets
