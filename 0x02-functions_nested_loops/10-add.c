@@ -3,6 +3,9 @@
 /**
  * add - returns the sum of two numbers
  *
+ * @n: operand for sum
+ * @m: operand for sum
+ *
  * Return: sum of two numbers
  */
 
