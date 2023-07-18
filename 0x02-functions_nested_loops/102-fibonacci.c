@@ -12,7 +12,7 @@ int main(void)
 	long count, new = 1, prev = 1, temp;
 
 	printf("%ld, ", prev);
-	for (count = 0; count < 50; count++)
+	for (count = 1; count < 50; count++)
 	{
 		temp = new;
 		new += prev;
