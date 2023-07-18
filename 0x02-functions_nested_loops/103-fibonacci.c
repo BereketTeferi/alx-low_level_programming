@@ -13,7 +13,7 @@ int main(void)
 
 	for (count = 0; count < 31; count++)
 	{
-		if (new % 2)
+		if (new % 2 == 0)
 		{
 			sum += new;
 		}
