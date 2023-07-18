@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
  * jack_bauer - time count down
@@ -16,12 +17,7 @@ void jack_bauer(void)
 			{
 				for (l = 0; l <= 9; l++)
 				{
-					_putchar(i);
-					_putchar(j);
-					_putchar(':');
-					_putchar(k);
-					_putchar(l);
-					_putchar('\n');
+					printf("%d%d:%d%d\n", i, j, k, l);
 				}
 			}
 		}
