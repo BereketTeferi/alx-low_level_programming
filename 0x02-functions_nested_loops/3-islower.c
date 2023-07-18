@@ -4,9 +4,9 @@
 /**
  * _islower - checks if its lower
  *
- * @param c: the character to check
+ * @c: the character to check
  *
- * @return 1 if c is lowercase
+ * Return: 1 if c is lowercase
  * 0 otherwise
  */
 
