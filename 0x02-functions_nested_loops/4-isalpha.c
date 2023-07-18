@@ -4,7 +4,7 @@
 /**
  * _isalpha - checks if alphabet
  *
- * @c - parament to check
+ * @c: parament to check
  *
  * Return: 1 if letter
  * 0 otherwise
