@@ -11,7 +11,7 @@ int main(void)
 {
 	int new = 1, prev = 1, sum = 0, count, temp;
 
-	for (count = 0; count < 27; count++)
+	for (count = 0; count < 20; count++)
 	{
 		if (new % 2)
 		{
