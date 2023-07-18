@@ -9,10 +9,9 @@
  */
 
 void print_times_table_row(int i, int j)
-
 {
 	int k;
-
+	
 	k = i * j;
 	if (k > 99)
 	{
@@ -58,7 +57,7 @@ void print_times_table_row(int i, int j)
 void print_times_table(int n)
 {
 	int i, j;
-
+	
 	if (n <= 15 && n >= 0)
 	{
 		for (i = 0; i <= n; i++)
