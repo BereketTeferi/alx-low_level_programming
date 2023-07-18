@@ -5,7 +5,6 @@
  *
  * @i: first number in the row
  * @j: second number in the row
- * @n: maximum number in the times table
  */
 
 void print_times_table_row(int i, int j)
@@ -56,7 +55,6 @@ void print_times_table_row(int i, int j)
 void print_times_table(int n)
 {
 	int i, j;
-	
 	if (n <= 15 && n >= 0)
 	{
 		for (i = 0; i <= n; i++)
