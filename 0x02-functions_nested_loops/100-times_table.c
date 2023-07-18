@@ -45,7 +45,6 @@ void print_times_table_row(int i, int j)
 		}
 		_putchar(k + '0');
 	}
-
 }
 
 /**
