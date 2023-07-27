@@ -2,6 +2,7 @@
 
 int main(void)
 {
+<<<<<<< HEAD
   int n;
   int a[5];
   int *p;
