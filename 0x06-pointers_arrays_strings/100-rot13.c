@@ -10,16 +10,26 @@
 
 char *rot13(char *str)
 {
-	int i;
-	char j;
+	int i, j;
+	char alpha[] = {'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E',
+		'f', 'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j',
+		'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N',
+		'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's',
+		'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W',
+		'x', 'X', 'y', 'Y', 'z', 'Z'};
+	char rot[] = {'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R',
+		's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W',
+		'x', 'X', 'y', 'Y', 'z', 'Z', 'a', 'A', 'b', 'B',
+		'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G',
+		'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M'};
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		for (j = 'a'; j <= 'z'; j++)
+		for (j = 0; j < 104; j++)
 		{
-			if (str[i] < 'n')
+			if (str[i] == alpha[j])
 			{
-				str[i] = str[i] + 13;
+				str[i] = rot[j];
 			}
 		}
 	}
