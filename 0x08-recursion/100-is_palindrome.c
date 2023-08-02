@@ -18,9 +18,9 @@ int is_palindrome(char *s)
 /**
  * str_len - calculate the length of string
  *
- * @s: The string to get its length
+ * @s: string passed
  *
- * Return: The length of the string
+ * Return: length of string
  */
 
 int str_len(char *s)
@@ -33,13 +33,13 @@ int str_len(char *s)
 }
 
 /**
- * palindrome_checker - Does the actual recursive check
+ * palindrome_checker - checks if palindrome
  *
- * @s: The string to check
- * @len: the length of the string
- * @i:initial value of s
+ * @s: string to be check
+ * @len: length of string
+ * @i:initial value
  *
- * Return: 1 if palindrome otherwise return 0
+ * Return: 1 if palindrome 0 otherwise
  */
 
 int palindrome_checker(char *s, int len, int i)
