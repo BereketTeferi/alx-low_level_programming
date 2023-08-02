@@ -1,5 +1,5 @@
 #include "main.h"
-int sqrt_helper(int n, int min, int max);
+long int sqrt_helper(int n, int min, int max);
 
 /**
  * _sqrt_recursion - square root of a number recursively
@@ -31,7 +31,7 @@ int _sqrt_recursion(int n)
  * Return: square root
  */
 
-int sqrt_helper(int n, int min, int max)
+long int sqrt_helper(int n, int min, int max)
 {
 	int mid = (min + max) / 2;
 	int sq = mid * mid;
