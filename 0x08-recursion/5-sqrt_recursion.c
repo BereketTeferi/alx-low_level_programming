@@ -11,6 +11,10 @@ int sqrt_helper(int n, int min, int max);
 
 int _sqrt_recursion(int n)
 {
+	if (sqrt_helper(n, 0, n) != (int)sqrt_helper(n, 0, n))
+	{
+		return (-1);
+	}
 	return (sqrt_helper(n, 0, n));
 }
 
