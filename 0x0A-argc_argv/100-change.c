@@ -20,13 +20,13 @@ int main(int argc, char **argv)
 		printf("%s\n", "Error");
 		return (1);
 	}
-	money = atoi(argv[i]);
+	money = atoi(argv[1]);
 	if (money < 0)
 	{
 		printf("%d\n", 0);
 		return (0);
 	}
-	while (money)
+	while (money > 0)
 	{
 		if (money < value[i])
 		{
