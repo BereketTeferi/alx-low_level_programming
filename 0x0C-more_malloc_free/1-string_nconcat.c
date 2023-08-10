@@ -41,17 +41,11 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 		newstr = malloc(sizeof(char) * (len1 + n + 1));
 	}
 	if (newstr == NULL)
-	{
 		return (NULL);
-	}
 	for (i = 0; i < len1; i++)
-	{
 		newstr[i] = s1[i];
-	}
 	for (j = 0; j <= size; j++)
-	{
 		newstr[i++] = s2[j];
-	}
 	newstr[i++] = '\0';
 	return (newstr);
 }
