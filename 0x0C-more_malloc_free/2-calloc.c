@@ -5,6 +5,8 @@
  *
  * @nmemb: number
  * @size: size
+ *
+ * Return: array
  */
 
 void *_calloc(unsigned int nmemb, unsigned int size)
