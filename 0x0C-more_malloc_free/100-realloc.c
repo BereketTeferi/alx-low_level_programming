@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _realloc : realocates memory block
+ * _realloc - realocates memory block
  * using malloc and free
  *
  * @ptr: pointer
