@@ -17,14 +17,14 @@ int main(int arcou, char **arr)
 
 	if (arcou != 4)
 	{
-		printf("%s\n", "Error");
+		printf("Error\n");
 		exit(98);
 	}
 	op = get_op_func(arr[2]);
 	if (!op)
 	{
-		printf("%s\n", "Error");
-		exit(98);
+		printf("Error\n");
+		exit(99);
 	}
 	printf("%d\n", op(atoi(arr[1]), atoi(arr[3])));
 	return (0);
