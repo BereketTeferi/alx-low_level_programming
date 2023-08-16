@@ -29,12 +29,13 @@ int main(int argc, char *argv[])
 	}
 	for (i = 0; i < nobytes; i++)
 	{
-		if (i == nobytes - 1)
+		printf("%02x", opcode[i] & 0xFF);
+		if (i != nobytes - 1)
 		{
-			printf("%02hhx", opcode[i]);
-			break;
+			printf(" ");
 		}
-		printf("%02hhx\n", opcode[i]);
 	}
+	printf("\n");
+
 	return (0);
 }
