@@ -2,7 +2,7 @@ global main
 extern printf
 
 section .data
-    msg db "Hello, Holberton!", 0
+    msg db "Hello, Holberton!\n", 0
 
 section .text
 
