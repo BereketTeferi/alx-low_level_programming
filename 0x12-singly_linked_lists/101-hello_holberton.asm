@@ -1,15 +1,17 @@
-global main
-extern printf
-
 section .data
-    msg db "Hello, Holberton!\n", 0
+    hello_msg db "Hello, Holberton", 0
+    newline db 10, 0  ; Newline character
 
 section .text
+    global main
+    extern printf
 
 main:
-    mov rdi, msg
-    xor eax, eax
+    push rbp
+    mov rdi, hello_msg
     call printf
 
-    xor eax, eax
+    mov rdi, newline
+    call printf
+    pop rbp
     ret
