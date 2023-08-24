@@ -1,6 +1,6 @@
 section .data
     hello_msg db "Hello, Holberton", 0
-    newline db 10, 0  ; Newline character
+    newline db 10, 0
 
 section .text
     global main
