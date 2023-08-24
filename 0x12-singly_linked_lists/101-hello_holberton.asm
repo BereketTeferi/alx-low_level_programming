@@ -1,18 +1,15 @@
-section .text
-global _start
-
-_start:
-mov rdi, msg
-call print
-
-mov rax, 60
-xor rdi, rdi
-syscall
+global main
+extern printf
 
 section .data
-msg: db "Hello, Holberton", 10, 0
+    msg db "Hello, Holberton!", 0
 
-print:
-mov rax, 1
-syscall
-ret
+section .text
+
+main:
+    mov rdi, msg
+    xor eax, eax
+    call printf
+
+    xor eax, eax
+    ret
