@@ -1,11 +1,11 @@
-#include <stdio.h>
 #include "lists.h"
 
 /**
- * print_listint - prints lists in list
- * @h: head of list
+ * print_listint - prints elements in list
  *
- * Return: number of nodes.
+ * @h: pointer of head of list
+ *
+ * Return: number of elements in list
  */
 
 size_t print_listint(const listint_t *h)
@@ -14,7 +14,7 @@ size_t print_listint(const listint_t *h)
 
 	while (h)
 	{
-		printf("%d\n", h->n);
+		printf("%d\n", h->next);
 		count++;
 		h = h->next;
 	}
