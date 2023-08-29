@@ -7,16 +7,15 @@
  *
  * Return: number of elements in list
  */
-
 size_t print_listint(const listint_t *h)
 {
-	int nodes = 0;
+	size_t num = 0;
 
-	while (h != NULL)
+	while (h)
 	{
-		printf("%d \n", h->n);
-		nodes++;
+		printf("%d\n", h->n);
+		num++;
 		h = h->next;
 	}
-	return (nodes);
+	return (num);
 }
