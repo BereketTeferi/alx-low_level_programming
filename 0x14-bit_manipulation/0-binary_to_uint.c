@@ -1,26 +1,6 @@
 #include "main.h"
 
 /**
- * power - calculates power
- *
- * @base: base number
- * @exponent: eponent of the base
- *
- * Return: power.
- */
-
-int power(int base, int exponent)
-{
-	int result = 1, i;
-
-	for (i = 0; i < exponent; i++)
-	{
-		result *= base;
-	}
-	return (result);
-}
-
-/**
  * binary_to_uint - converts binary to decimal
  *
  * @b: binary
@@ -30,20 +10,18 @@ int power(int base, int exponent)
 
 unsigned int binary_to_uint(const char *b)
 {
-	int dec = 0, len = strlen(b), i;
+	int dec = 0, i = 0;
 
 	if (b == NULL)
 		return (0);
-	for (i = len - 1; i >= 0; i--)
+	while (b[i] != '\0')
 	{
-		if (b[i] == '1')
-		{
-			dec += power(2, len - 1	- i);
-		}
-		else if (b[i] != '0')
-		{
+		if (b[i] != '0' && b[i] != '1')
 			return (0);
-		}
+		dec = dec << 1;
+		if (b[i] == '1')
+			dec += 1;
+		i++;
 	}
 	return (dec);
 }
