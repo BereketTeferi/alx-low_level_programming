@@ -68,8 +68,9 @@ int close_all(int file_from, int file_to)
 
 int main(int argc, char **argv)
 {
-	int file_from, file_to, read_file_from, write_file_to;
-	char buffer[1024];
+	int file_from, file_to;
+	ssize_t read_file_from, write_file_to;
+	char *buffer;
 
 	if (argc != 3)
 	{
@@ -84,7 +85,10 @@ int main(int argc, char **argv)
 	{
 		print_error(file_from, file_to, (file_from == -1) ? argv[1] : argv[2]);
 	}
-	while ((read_file_from = read(file_from, buffer, sizeof(buffer))) > 0)
+	buffer = malloc(sizeof(char) * 1024 + 1);
+	if (!buffer)
+		return (0);
+	while ((read_file_from = read(file_from, buffer, sizeof(buffer - 1))) > 0)
 	{
 		write_file_to = write(file_to, buffer, read_file_from);
 		if (write_file_to == -1 || read_file_from != write_file_to)
