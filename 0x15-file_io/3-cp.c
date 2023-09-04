@@ -1,61 +1,97 @@
-#include "main.h"
-
-#define BUFSIZE 1024
+nclude "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 /**
- * main - main function
- *
- * @argc: number of argument
- * @argv: array of arguments
- *
- * Return: 0
- */
+ *  * print_error - Print an error message and exit.
+ *   * @file_from: File descriptor for source file.
+ *    * @file_to: File descriptor for destination file.
+ *     * @filename: Name of the file.
+ *      * Return: 98 if can't read, 99 if can't write, 0 otherwise.
+ *       */
+int print_error(int file_from, int file_to, char *filename)
+{
+	    if (file_from == -1)
+		        {
+				        dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
+					        exit(98);
+						    }
+	        if (file_to == -1)
+			    {
+				            dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
+					            exit(99);
+						        }
+		    return (0);
+}
 
-int main(int argc, char *argv[]) {
-	char *file_from = argv[1];
-	                    char *file_to = argv[2];
+/**
+ *  * close_all - Close file descriptors.
+ *   * @file_from: File descriptor for source file.
+ *    * @file_to: File descriptor for destination file.
+ *     * Return: 0 on success, 100 on error.
+ *      */
+int close_all(int file_from, int file_to)
+{
+	    int result = 0;
 
-int fd_dest = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-			    int fd_source = open(file_from, O_RDONLY);
-char buffer[BUFSIZE];
-                                            ssize_t bytes_read, bytes_written;
-		    	    if (argc != 3) {
-		            dprintf(2, "Usage: %s file_from file_to\n", argv[0]);
-			            exit(97);
-				        }
-
-			    if (fd_source == -1) {
-				            dprintf(2, "Error: Can't read from file %s\n", file_from);
-					            exit(98);
+	        if (close(file_from) == -1)
+			    {
+				            dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
+					            result = 100;
 						        }
 
-				    if (fd_dest == -1) {
-					            dprintf(2, "Error: Can't write to file %s\n", file_to);
-						            close(fd_source);
-							            exit(99);
-								     }
+		    if (close(file_to) == -1)
+			        {
+					        dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_to);
+						        result = 100;
+							    }
 
-					        while ((bytes_read = read(fd_source, buffer, BUFSIZE)) > 0) {
-							        bytes_written = write(fd_dest, buffer, bytes_read);
-								        if (bytes_written == -1) {
-										            dprintf(2, "Error: Can't write to file %s\n", file_to);
-											                close(fd_source);
-													            close(fd_dest);
-														                exit(99);
-																        }
-									    }
-
-						    if (bytes_read == -1) {
-							            dprintf(2, "Error: Can't read from file %s\n", file_from);
-								            close(fd_source);
-									            close(fd_dest);
-										            exit(98);
-											        }
-
-						        if (close(fd_source) == -1 || close(fd_dest) == -1) {
-								        dprintf(2, "Error: Can't close fd\n");
-									        exit(100);
-										    }
-
-							    return 0;
+		        return result;
 }
+
+/**
+ *  * main - Copy the content of one file to another.
+ *   * @argc: The number of arguments.
+ *    * @argv: An array of strings.
+ *     * Return: 97 if the number of arguments is not correct,
+ *      *         98 if file_from does not exist or cannot be read,
+ *       *         99 if writing to file_to fails,
+ *        *         100 if closing a file descriptor fails,
+ *         *         0 on success.
+ *          */
+int main(int argc, char **argv)
+{
+	    int file_from, file_to;
+	        ssize_t read_file_from, write_file_to;
+		    char buffer[1024];
+
+		        if (argc != 3)
+				    {
+					            dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+						            exit(97);
+							        }
+
+			    file_from = open(argv[1], O_RDONLY);
+			        file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+
+				    if (file_from == -1 || file_to == -1)
+					        {
+							        print_error(file_from, file_to, (file_from == -1) ? argv[1] : argv[2]);
+								    }
+
+				        while ((read_file_from = read(file_from, buffer, sizeof(buffer))) > 0)
+						    {
+							            write_file_to = write(file_to, buffer, read_file_from);
+								            if (write_file_to == -1 || read_file_from != write_file_to)
+										            {
+												                print_error(0, -1, argv[2]);
+														        }
+									        }
+
+					    close_all(file_from, file_to);
+
+					        return 0;
+}
+
