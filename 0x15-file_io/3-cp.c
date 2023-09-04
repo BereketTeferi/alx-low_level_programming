@@ -93,15 +93,16 @@ int main(int argc, char **argv)
 		return (0);
 	buff[1024] = '\0';
 
-	while ((read_file_from = read(file_from, buffer, sizeof(buffer))) > 0)
+	while ((read_file_from = read(file_from, buff, sizeof(buff))) > 0)
 	{
-		write_file_to = write(file_to, buffer, read_file_from);
+		write_file_to = write(file_to, buff, read_file_from);
 		if (write_file_to == -1 || read_file_from != write_file_to)
 		{
 			print_error(0, -1, argv[2]);
 		}
 	}
 
+	free(buff);
 	close_all(file_from, file_to);
 	return (0);
 }
