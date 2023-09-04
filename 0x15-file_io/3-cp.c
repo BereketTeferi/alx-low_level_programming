@@ -14,15 +14,15 @@
 
 int print_error(int file_from, int file_to, char *filename)
 {
-	if (file_from == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
-		exit(98);
-	}
 	if (file_to == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
 		exit(99);
+	}
+	if (file_from == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
+		exit(98);
 	}
 	return (0);
 }
@@ -39,18 +39,18 @@ int print_error(int file_from, int file_to, char *filename)
 
 int close_all(int file_from, int file_to)
 {
-	if (close(file_from) == -1)
+	if (close(file_to) == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
 		exit(100);
 	}
 
-	if (close(file_to) == -1)
+	if (close(file_from) == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_to);
 		exit(100);
 	}
-	return 0;
+	return (0);
 }
 
 /**
@@ -68,8 +68,7 @@ int close_all(int file_from, int file_to)
 
 int main(int argc, char **argv)
 {
-	int file_from, file_to;
-	ssize_t read_file_from, write_file_to;
+	int file_from, file_to, read_file_from, write_file_to;
 	char buffer[1024];
 
 	if (argc != 3)
@@ -95,5 +94,5 @@ int main(int argc, char **argv)
 	}
 	close_all(file_from, file_to);
 
-	return 0;
+	return (0);
 }
