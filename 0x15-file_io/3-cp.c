@@ -1,79 +1,61 @@
 #include "main.h"
 
-/**
- * print_error_and_exit - Prints an error message and exits the program.
- *
- * @err_code: error code to use in the message.
- * @file_name: name of the file associated with the error.
- */
-void print_error_and_exit(int err_code, const char *file_name)
-{
-	dprintf(STDERR_FILENO, "Error: %s: %s\n", err_code == 98 ? "Can't read from file" : "Can't write to", file_name);
-	exit(err_code);
-}
+#define BUFSIZE 1024
 
 /**
- * close_fd_and_exit - Closes a file descriptor and exits if there is an error.
+ * main - main function
  *
- * @fd: The file descriptor to close.
+ * @argc: number of argument
+ * @argv: array of arguments
+ *
+ * Return: 0
  */
 
-void close_fd_and_exit(int fd)
-{
-	if (close(fd) == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
-		exit(100);
-	}
-}
+int main(int argc, char *argv[]) {
+	char *file_from = argv[1];
+	                    char *file_to = argv[2];
 
-int main(int argc, char **argv)
-{
-	int src_fd, dest_fd;
-	char *buffer;
-	ssize_t bytes_read, bytes_written;
+int fd_dest = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+			    int fd_source = open(file_from, O_RDONLY);
+char buffer[BUFSIZE];
+                                            ssize_t bytes_read, bytes_written;
+		    	    if (argc != 3) {
+		            dprintf(2, "Usage: %s file_from file_to\n", argv[0]);
+			            exit(97);
+				        }
 
-	if (argc != 3)
-	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-		exit(97);
-	}
+			    if (fd_source == -1) {
+				            dprintf(2, "Error: Can't read from file %s\n", file_from);
+					            exit(98);
+						        }
 
-	src_fd = open(argv[1], O_RDONLY);
-	if (src_fd == -1)
-	{
-		print_error_and_exit(98, argv[1]);
-	}
+				    if (fd_dest == -1) {
+					            dprintf(2, "Error: Can't write to file %s\n", file_to);
+						            close(fd_source);
+							            exit(99);
+								     }
 
-	dest_fd = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
-	if (dest_fd == -1)
-	{
-		close_fd_and_exit(src_fd);
-		print_error_and_exit(99, argv[2]);
-	}
-	buffer = malloc(1024);
-	if (buffer == NULL)
-	{
-		close_fd_and_exit(src_fd);
-		close_fd_and_exit(dest_fd);
-		dprintf(STDERR_FILENO, "Memory allocation error\n");
-		exit(1);
-	}
+					        while ((bytes_read = read(fd_source, buffer, BUFSIZE)) > 0) {
+							        bytes_written = write(fd_dest, buffer, bytes_read);
+								        if (bytes_written == -1) {
+										            dprintf(2, "Error: Can't write to file %s\n", file_to);
+											                close(fd_source);
+													            close(fd_dest);
+														                exit(99);
+																        }
+									    }
 
-	while ((bytes_read = read(src_fd, buffer, 1024)) > 0)
-	{
-		bytes_written = write(dest_fd, buffer, bytes_read);
-		if (bytes_written != bytes_read)
-		{
-			close_fd_and_exit(src_fd);
-			close_fd_and_exit(dest_fd);
-			free(buffer);
-			print_error_and_exit(99, argv[2]);
-		}
-	}
-	close_fd_and_exit(src_fd);
-	close_fd_and_exit(dest_fd);
-	free(buffer);
+						    if (bytes_read == -1) {
+							            dprintf(2, "Error: Can't read from file %s\n", file_from);
+								            close(fd_source);
+									            close(fd_dest);
+										            exit(98);
+											        }
 
-	return 0;
+						        if (close(fd_source) == -1 || close(fd_dest) == -1) {
+								        dprintf(2, "Error: Can't close fd\n");
+									        exit(100);
+										    }
+
+							    return 0;
 }
