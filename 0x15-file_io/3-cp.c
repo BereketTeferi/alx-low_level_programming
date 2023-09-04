@@ -91,6 +91,7 @@ int main(int argc, char **argv)
 
 	while (!buff)
 		return (0);
+	buff[1024] = '\0';
 
 	while ((read_file_from = read(file_from, buffer, sizeof(buffer))) > 0)
 	{
