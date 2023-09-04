@@ -1,77 +1,37 @@
 #include "main.h"
 
 /**
- * print_error - Print an error message and exit.
+ * print_error_and_exit - Prints an error message and exits the program.
  *
- * @file_from: File descriptor for source file.
- * @file_to: File descriptor for destination file.
- * @filename: Name of the file.
- *
- * Return: 98 if can't read
- * 99 if can't write
- * 0 otherwise.
+ * @err_code: error code to use in the message.
+ * @file_name: name of the file associated with the error.
  */
-
-int print_error(int file_from, int file_to, char *filename)
+void print_error_and_exit(int err_code, const char *file_name)
 {
-	if (file_from == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
-		exit(98);
-	}
-	if (file_to == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
-		exit(99);
-	}
-
-	return (0);
+	dprintf(STDERR_FILENO, "Error: %s: %s\n", err_code == 98 ? "Can't read from file" : "Can't write to", file_name);
+	exit(err_code);
 }
 
 /**
- * close_all - Close file descriptors.
+ * close_fd_and_exit - Closes a file descriptor and exits if there is an error.
  *
- * @file_from: File descriptor for source file.
- * @file_to: File descriptor for destination file.
- *
- * Return: 0 on success
- * 100 on error.
+ * @fd: The file descriptor to close.
  */
 
-int close_all(int file_from, int file_to)
+void close_fd_and_exit(int fd)
 {
-	if (close(file_from) == -1)
+	if (close(fd) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
 	}
-
-	if (close(file_to) == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_to);
-		exit(100);
-	}
-
-	return (0);
 }
-
-/**
- * main - Copy the content of one file to another.
- *
- * @argc: number of arguments.
- * @argv: array of strings.
- * Return: 97 if the number of arguments is not correct
- * 98 if file_from does not exist or cannot be read
- * 99 if writing to file_to fails
- * 100 if closing a file descriptor fails
- * 0 on success.
- */
 
 int main(int argc, char **argv)
 {
-	int file_from, file_to;
-	ssize_t read_file_from, write_file_to;
-	char *buff;
+	int src_fd, dest_fd;
+	char *buffer;
+	ssize_t bytes_read, bytes_written;
 
 	if (argc != 3)
 	{
@@ -79,31 +39,41 @@ int main(int argc, char **argv)
 		exit(97);
 	}
 
-	file_from = open(argv[1], O_RDONLY);
-	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-
-	if (file_from == -1 || file_to == -1)
+	src_fd = open(argv[1], O_RDONLY);
+	if (src_fd == -1)
 	{
-		print_error(file_from, file_to, (file_from == -1) ? argv[1] : argv[2]);
+		print_error_and_exit(98, argv[1]);
 	}
 
-	buff = malloc(sizeof(char) * 1024 + 1);
-
-	while (!buff)
-		return (0);
-	buff[1024] = '\0';
-
-	while ((read_file_from = read(file_from, buff, 1024)) > 0)
+	dest_fd = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+	if (dest_fd == -1)
 	{
-		write_file_to = write(file_to, buff, read_file_from);
-		if (write_file_to == -1 || read_file_from != write_file_to)
+		close_fd_and_exit(src_fd);
+		print_error_and_exit(99, argv[2]);
+	}
+	buffer = malloc(1024);
+	if (buffer == NULL)
+	{
+		close_fd_and_exit(src_fd);
+		close_fd_and_exit(dest_fd);
+		dprintf(STDERR_FILENO, "Memory allocation error\n");
+		exit(1);
+	}
+
+	while ((bytes_read = read(src_fd, buffer, 1024)) > 0)
+	{
+		bytes_written = write(dest_fd, buffer, bytes_read);
+		if (bytes_written != bytes_read)
 		{
-			print_error(0, -1, argv[2]);
+			close_fd_and_exit(src_fd);
+			close_fd_and_exit(dest_fd);
+			free(buffer);
+			print_error_and_exit(99, argv[2]);
 		}
 	}
+	close_fd_and_exit(src_fd);
+	close_fd_and_exit(dest_fd);
+	free(buffer);
 
-	free(buff);
-	close_all(file_from, file_to);
-	return (0);
+	return 0;
 }
-
