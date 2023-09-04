@@ -40,21 +40,19 @@ int print_error(int file_from, int file_to, char *filename)
 
 int close_all(int file_from, int file_to)
 {
-	int result = 0;
-
 	if (close(file_from) == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from);
-		result = 100;
+		exit(100);
 	}
 
 	if (close(file_to) == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_to);
-		result = 100;
+		exit(100);
 	}
 
-	return (result);
+	return (0);
 }
 
 /**
