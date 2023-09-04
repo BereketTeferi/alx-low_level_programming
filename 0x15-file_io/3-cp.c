@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 {
 	int file_from, file_to;
 	ssize_t read_file_from, write_file_to;
-	char buffer[1024];
+	char *buff;
 
 	if (argc != 3)
 	{
@@ -87,7 +87,9 @@ int main(int argc, char **argv)
 		print_error(file_from, file_to, (file_from == -1) ? argv[1] : argv[2]);
 	}
 
-	while (!buffer[1024])
+	buff = malloc(sizeof(char) * 1024 + 1);
+
+	while (!buff)
 		return (0);
 
 	while ((read_file_from = read(file_from, buffer, sizeof(buffer))) > 0)
