@@ -80,12 +80,15 @@ int main(int argc, char **argv)
 	}
 
 	file_from = open(argv[1], O_RDONLY);
-	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP  | S_IROTH);
+	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
 	if (file_from == -1 || file_to == -1)
 	{
 		print_error(file_from, file_to, (file_from == -1) ? argv[1] : argv[2]);
 	}
+
+	while (!buffer)
+		return (0);
 
 	while ((read_file_from = read(file_from, buffer, sizeof(buffer))) > 0)
 	{
