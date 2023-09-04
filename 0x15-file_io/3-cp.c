@@ -86,7 +86,7 @@ int main(int argc, char **argv)
 
 	if (file_from == -1 || file_to == -1)
 	{
-		print_error(file_from, file_to, (file_from == -1) ? argv[1] : arg[2]);
+		print_error(file_from, file_to, (file_from == -1) ? argv[1] : argv[2]);
 	}
 
 	while ((read_file_from = read(file_from, buffer, sizeof(buffer))) > 0)
