@@ -93,7 +93,7 @@ int main(int argc, char **argv)
 		return (0);
 	buff[1024] = '\0';
 
-	while ((read_file_from = read(file_from, buff, sizeof(buff))) > 0)
+	while ((read_file_from = read(file_from, buff, 1024)) > 0)
 	{
 		write_file_to = write(file_to, buff, read_file_from);
 		if (write_file_to == -1 || read_file_from != write_file_to)
