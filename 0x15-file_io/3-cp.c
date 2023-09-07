@@ -88,7 +88,7 @@ int main(int argc, char **argv)
 	buffer = malloc(sizeof(char) * 1024 + 1);
 	if (!buffer)
 		return (0);
-	while (read_file_from != NULL)
+	while (read_file_from)
 	{
 		read_file_from = read(file_from, buffer, 1024);
 		print_error(read_file_from, 0, argv[1]);
