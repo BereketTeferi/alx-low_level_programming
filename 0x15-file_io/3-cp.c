@@ -88,6 +88,16 @@ int main(int argc, char **argv)
 	buffer = malloc(sizeof(char) * 1024 + 1);
 	if (!buffer)
 		return (0);
+	while (read_file_from != NULL)
+	{
+		read_file_from = read(file_from, buffer, 1024);
+		print_error(read_file_from, 0, argv[1]);
+		buffer[1024] = '\0';
+
+		write_file_to = write(file_to, buffer, read_file_from);
+		if (read_file_from != write_file_to)
+			print_error(0, -1, argv[2]);
+	/**
 	while ((read_file_from = read(file_from, buffer, sizeof(buffer - 1))) > 0)
 	{
 		write_file_to = write(file_to, buffer, read_file_from);
@@ -96,6 +106,7 @@ int main(int argc, char **argv)
 			print_error(0, -1, argv[2]);
 		}
 	}
+	*/
 	close_all(file_from, file_to);
 
 	return (0);
