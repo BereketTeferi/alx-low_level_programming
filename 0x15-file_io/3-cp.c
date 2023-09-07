@@ -91,12 +91,10 @@ int main(int argc, char **argv)
 	while ((read_file_from = read(file_from, buffer, sizeof(buffer - 1))) > 0)
 	{
 		write_file_to = write(file_to, buffer, read_file_from);
-		if (write_file_to == -1 || read_file_from != write_file_to)
+		if (read_file_from != write_file_to)
 		{
 			print_error(0, -1, argv[2]);
 		}
-		else
-			print_error(0, -1, argv[1]);
 	}
 	close_all(file_from, file_to);
 
