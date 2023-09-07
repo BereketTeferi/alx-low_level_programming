@@ -96,7 +96,7 @@ int main(int argc, char **argv)
 			print_error(0, -1, argv[2]);
 		}
 		else
-			print_error(0, -1, argv[2]);
+			print_error(0, -1, argv[1]);
 	}
 	close_all(file_from, file_to);
 
