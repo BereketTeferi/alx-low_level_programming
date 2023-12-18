@@ -7,10 +7,11 @@
  *
  * Return: Number of letters read and printed, or 0 on failure.
  */
+
 ssize_t read_textfile(const char *filename, size_t letters)
 {
 	int fd;
-	char* buffer;
+	char *buffer;
 	ssize_t bytes_read;
 	ssize_t bytes_written;
 	
